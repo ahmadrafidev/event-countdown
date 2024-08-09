@@ -2,19 +2,26 @@
 
 import { useState, useEffect } from "react";
 
+interface TimeLeft {
+  days?: number;
+  hours?: number;
+  minutes?: number;
+  seconds?: number;
+}
+
 export default function Home() {
-  const [timeLeft, setTimeLeft] = useState({});
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({});
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
 
     const calculateTimeLeft = () => {
-      const eventDate = new Date("2024-12-31T00:00:00Z"); 
+      const eventDate = new Date("2024-12-31T00:00:00Z"); // The data can be change
       const currentTime = new Date();
       const difference = eventDate.getTime() - currentTime.getTime();
 
-      let timeLeft = {};
+      let timeLeft: TimeLeft = {};
 
       if (difference > 0) {
         timeLeft = {
@@ -73,6 +80,14 @@ export default function Home() {
         <p className="text-sm md:text-lg text-gray-950 dark:text-white font-medium mb-8">
           🕒 LEFT UNTIL THE 2024 ENDS
         </p>
+        <div className="container mx-auto">
+          <div className="flex flex-col md:flex-row justify-center items-center md:items-baseline gap-x-2 text-center space-y-4">
+            <h2 className="text-2xl md:text-3xl font-semibold font-sans text-gray-900 dark:text-gray-50">Make the days count.</h2>
+            <p className="text-base md:text-xl text-gray-600 dark:text-gray-100">
+              Time is the most precious resource.
+            </p>
+          </div>
+        </div>
       </div>
     </main>
   );
